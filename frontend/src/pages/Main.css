@@ -1,0 +1,84 @@
+/* src/pages/Main.css */
+
+/* 페이지 전체 컨테이너 */
+.container {
+  /* padding 포함해서 width 100%로 계산 */
+  box-sizing: border-box;
+  padding: 20px;
+  width: 100%;
+  margin: 0;
+  min-height: 100vh;
+  background-color: #c5eef6;
+  font-family: Arial, sans-serif;
+}
+
+.button-group{
+  display: flex;
+  gap: 20px;
+}
+/* 페이지 제목 */
+.container h1 {
+  text-align: center;
+  color: #333;
+  margin-bottom: 20px;
+}
+
+.container h2 {
+  text-align: center;
+  color: #333;
+  margin-bottom: 20px;
+}
+
+/* 글 작성 폼 */
+.post-form {
+  display: flex;
+  flex-direction: column;
+  max-width: 600px;
+  margin: 0 auto;;
+  gap: 10px;
+  margin-bottom: 30px;
+}
+
+.post-form input[type="text"] {
+  padding: 8px;
+  font-size: 16px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+}
+
+/* 버튼 */
+.post-form button {
+  width: 100px;
+  padding: 4px;
+  font-size: 16px;
+  background-color: #007bff;
+  color: white;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+}
+
+.post-form button:hover {
+  background-color: #0056b3;
+}
+
+/* 글 목록 */
+.post-list {
+  list-style: none;
+  padding: 0;
+}
+
+.post-list li {
+  padding: 8px;
+  margin-bottom: 0;
+  border-bottom: 1px solid #ccc;
+}
+
+.post-list li strong {
+  display: block;
+  font-size: 18px;
+  color: #007bff;
+}
+.pagination {
+  text-align: center;
+}
