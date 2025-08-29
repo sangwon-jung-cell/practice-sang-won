@@ -1,6 +1,10 @@
 import { motion } from "framer-motion";
+import { useNavigate } from "react-router-dom";
+import Button from "../components/Button";
 
-export default function AboutMe() {
+export default function Main() {
+  const navigate = useNavigate();
+
   return (
     <main className="min-h-screen flex items-center justify-center bg-gradient-to-br from-purple-100 to-blue-100 p-6">
       <motion.div
@@ -17,6 +21,8 @@ export default function AboutMe() {
             className="w-32 h-32 rounded-full border-4 border-purple-200 shadow-md"
           />
         </div>
+
+        <Button onClick={() => navigate("/home")}>HOME</Button>
 
         {/* 이름 + 소개 */}
         <h1 className="text-2xl font-bold text-center mt-4 text-gray-800">
@@ -37,7 +43,7 @@ export default function AboutMe() {
         {/* 소셜 링크 */}
         <div className="flex justify-center gap-6 mt-6">
           <a
-            href="https://github.com/yourusername"
+            href="https://github.com/sangwon-jung-cell/practice-sang-won"
             className="text-gray-600 hover:text-black"
             target="_blank"
           >

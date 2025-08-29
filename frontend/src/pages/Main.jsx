@@ -46,10 +46,10 @@ export default function Main() {
     <div className="container">
       {/* 상단 버튼 영역*/}
       <div className="button-group">
-        <Button onClick={() => alert("클릭됨!")}>HOME</Button>
-        <Button onClick={() => navigate("/about")}>introduce</Button>
+        <Button onClick={() => navigate("/about")}>About Me</Button>
+        <Button onClick={() => navigate("/gallery")}>Gallery</Button>
       </div>
-      <h1>wellcome to Kevin's page</h1>
+      <h1>wellcome to Kevin's board</h1>
       <h2>write whatever you want!</h2>
 
       {/* 글 작성 폼 */}

@@ -1,0 +1,22 @@
+from sqlalchemy.orm import Session
+from app.models import postmodel
+from app.schemas import boardschemas
+
+def get_posts(db: Session, skip: int = 0, limit: int = 10):
+    rows = (
+        db.query(postmodel.Post.id, postmodel.Post.title, postmodel.Post.content)
+        .order_by(postmodel.Post.id.desc())
+        .offset(skip)
+        .limit(limit)
+        .all()
+    )
+    return [
+        {"id": r.id, "title": r.title, "content": r.content}
+        for r in rows
+    ]
+def create_post(db: Session, post: boardschemas.PostCreate):
+    db_post = postmodel.Post(title=post.title, content=post.content)
+    db.add(db_post)
+    db.commit()
+    db.refresh(db_post)
+    return db_post
