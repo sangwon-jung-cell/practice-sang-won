@@ -14,6 +14,7 @@ def get_posts(db: Session, skip: int = 0, limit: int = 10):
         {"id": r.id, "title": r.title, "content": r.content}
         for r in rows
     ]
+
 def create_post(db: Session, post: boardschemas.PostCreate):
     db_post = postmodel.Post(title=post.title, content=post.content)
     db.add(db_post)

@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useRef } from "react";
 import axios from "axios";
 import Button from "../components/Button";
 import "./Main.css"
@@ -12,8 +12,25 @@ export default function Main() {
   const postPerPage = 10;
   const [title, setTitle] = useState("");        // 글 제목 입력 상태
   const [content, setContent] = useState("");    // 글 내용 입력 상태
+  const fileInputRef = useRef(null);   // 숨겨진 파일 input 참조
 
 
+
+  const handleButtonClick = () => {
+    fileInputRef.current.click();
+  };
+
+  const handleFileChange = (event) => {
+    const file = event.target.files[0];
+    if (!file) return;
+
+    const formData = new FormData();
+    formData.append("file", file);      // 서버에서 받을 필드 이름
+
+    axios.post("http://127.0.0.1:8000/upload/", formData)
+    .then((data) => console.log("업로드 완료:", data))
+    .catch((err) => console.error("업로드 실패:", err));
+  };
 
   
   // 백엔드에서 글 목록 가져오기
@@ -69,6 +86,17 @@ export default function Main() {
           required
         />
         <Button type="submit">작성</Button>
+        <div>
+          <Button onClick={handleButtonClick}>이미지 첨부</Button>
+          {/* 숨겨진 파일 input */}
+          <input
+            type="file"
+            accept="image/*"
+            ref={fileInputRef}
+            style={{ display: "none" }}
+            onChange={handleFileChange}
+          />
+        </div>
       </form>
 
       {/* 글 목록 */}

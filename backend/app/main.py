@@ -1,8 +1,9 @@
 from fastapi import FastAPI
 from app.routers import posts
 from app.db.database import Base, engine
-from app.routers import posts
+from app.routers import posts, upload
 from fastapi.middleware.cors import CORSMiddleware
+from fastapi.staticfiles import StaticFiles
 
 # DB 테이블 생성
 Base.metadata.create_all(bind=engine)
@@ -19,6 +20,7 @@ app.add_middleware(
 )
 
 app.include_router(posts.router, prefix="/posts", tags=["posts"])
+app.include_router(upload.router, prefix="/upload", tags=["upload"])
 
 @app.get("/")
 def root():

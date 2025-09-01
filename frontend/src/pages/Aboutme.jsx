@@ -29,7 +29,7 @@ export default function Main() {
           정상원
         </h1>
         <p className="text-center text-gray-500 mt-2">
-          풀스택 개발자 지망생 🚀 | React & FastAPI 공부중
+          백엔드 개발자 지망생 🚀 | React & FastAPI 공부중
         </p>
 
         {/* 자기소개 문단 */}
@@ -50,11 +50,10 @@ export default function Main() {
             GitHub
           </a>
           <a
-            href="https://linkedin.com/in/yourusername"
+            href="https://github.com/sangwon-jung-cell/practice-sang-won"
             className="text-gray-600 hover:text-blue-700"
             target="_blank"
           >
-            LinkedIn
           </a>
         </div>
       </motion.div>
