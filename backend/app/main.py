@@ -22,6 +22,8 @@ app.add_middleware(
 app.include_router(posts.router, prefix="/posts", tags=["posts"])
 app.include_router(upload.router, prefix="/upload", tags=["upload"])
 
+app.mount("/static", StaticFiles(directory="static"), name="static")
+
 @app.get("/")
 def root():
     return {"message": "Hello FastAPI"}

@@ -1,10 +1,10 @@
 from sqlalchemy.orm import Session
-from app.models import postmodel
-from app.schemas import boardschemas
+from app.models import postmodel, imagesmodel
+from app.schemas import boardschemas, images_schemas
 
 def get_posts(db: Session, skip: int = 0, limit: int = 10):
     rows = (
-        db.query(postmodel.Post.id, postmodel.Post.title, postmodel.Post.content)
+        db.query(postmodel.Post)
         .order_by(postmodel.Post.id.desc())
         .offset(skip)
         .limit(limit)
