@@ -25,7 +25,7 @@ export default function Main() {
     if (!file) return;
 
     const formData = new FormData();
-    formData.append("file", file);      // 서버에서 받을 필드 이름
+    formData.append("file", file);     // 서버에서 받을 필드 이름
 
     axios.post("http://127.0.0.1:8000/upload/", formData)
     .then((data) => console.log("업로드 완료:", data))

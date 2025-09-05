@@ -18,7 +18,7 @@ export default function Gallery() {
   return (
     <div>
       <Button onClick={() => navigate("/home")}>HOME</Button>
-      <h1>여기는 갤러리 페이지</h1>
+      <h1>여기는 갤러리 페이지 입니다</h1>
       <div className="gallery-container" style={{ display: "flex", flexWrap: "wrap", gap: "10px" }}>
         {images.map(img => (
           <div key={img.id} style={{ width: "150px", height: "150px" }}>
