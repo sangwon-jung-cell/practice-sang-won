@@ -1,7 +1,6 @@
 from fastapi import FastAPI
-from app.routers import posts
 from app.db.database import Base, engine
-from app.routers import posts, upload
+from app.routers import posts, upload, weather
 from fastapi.middleware.cors import CORSMiddleware
 from fastapi.staticfiles import StaticFiles
 
@@ -21,6 +20,7 @@ app.add_middleware(
 
 app.include_router(posts.router, prefix="/posts", tags=["posts"])
 app.include_router(upload.router, prefix="/upload", tags=["upload"])
+app.include_router(weather.router, prefix="/weather", tags=["weather"])
 
 app.mount("/static", StaticFiles(directory="static"), name="static")
 

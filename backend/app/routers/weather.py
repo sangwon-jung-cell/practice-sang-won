@@ -6,7 +6,7 @@ router = APIRouter()
 # 실제로는 환경 변수에 저장하는 것이 좋습니다.
 API_KEY = "5d88d6a2b12722c05e25f135c492cb0b"
 
-router.get("/weather")
+@router.get("/")
 async def get_weather(city: str):
     # 외부 날씨 API 호출
     url = f"http://api.openweathermap.org/data/2.5/weather?q={city}&appid={API_KEY}&units=metric"
