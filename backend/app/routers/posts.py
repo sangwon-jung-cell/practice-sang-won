@@ -1,9 +1,9 @@
 from fastapi import APIRouter, Depends, UploadFile, File
 from sqlalchemy.orm import Session
-from app.api import post_crud
-from app.models import postmodel
-from app.schemas import boardschemas
-from app.db import database
+from backend.app.api import post_crud
+from backend.app.models import postmodel
+from backend.app.schemas import boardschemas
+from backend.app.db import database
 from fastapi import Query
 import shutil
 

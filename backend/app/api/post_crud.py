@@ -1,6 +1,6 @@
 from sqlalchemy.orm import Session
-from app.models import postmodel, imagesmodel
-from app.schemas import boardschemas, images_schemas
+from backend.app.models import postmodel, imagesmodel
+from backend.app.schemas import boardschemas, images_schemas
 
 def get_posts(db: Session, skip: int = 0, limit: int = 10):
     rows = (

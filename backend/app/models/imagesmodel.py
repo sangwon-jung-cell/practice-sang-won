@@ -1,5 +1,5 @@
 from sqlalchemy import Column, Integer, String, ForeignKey, DateTime, func
-from app.db.database import Base
+from backend.app.db.database import Base
 
 class Post(Base):
     __tablename__ = "images"

@@ -1,9 +1,9 @@
 from fastapi import APIRouter, Depends, UploadFile, File
 from sqlalchemy.orm import Session
 import shutil
-from app.models import imagesmodel
-from app.db import database
-from app.schemas.images_schemas import ImageResponse
+from backend.app.models import imagesmodel
+from backend.app.db import database
+from backend.app.schemas.images_schemas import ImageResponse
 
 router = APIRouter()
 
@@ -16,12 +16,12 @@ def get_db():
 
 @router.post("/")
 async def upload_image(file: UploadFile = File(...), db: Session = Depends(get_db)):
-    file_path = f"static/images/{file.filename}"
-    with open(file_path, "wb") as f:
+    save_path = f"backend/static/images/{file.filename}"
+    with open(save_path, "wb") as f:
         shutil.copyfileobj(file.file, f)
     image = imagesmodel.Post(
         file_name=file.filename,
-        file_path=file_path,
+        file_path=f"static/images/{file.filename}",
     )
     db.add(image)
     db.commit()
