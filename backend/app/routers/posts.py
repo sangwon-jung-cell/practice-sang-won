@@ -16,7 +16,7 @@ def get_db():
     finally:
         db.close()
 
-@router.get("/")
+@router.get("/", response_model=list[boardschemas.Post])
 def read_posts(skip: int = 0, limit: int = 10, db: Session = Depends(get_db)):
     return post_crud.get_posts(db, skip = skip, limit = limit)
 

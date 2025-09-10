@@ -13,6 +13,8 @@ export default function Main() {
   const [title, setTitle] = useState("");        // 글 제목 입력 상태
   const [content, setContent] = useState("");    // 글 내용 입력 상태
   const fileInputRef = useRef(null);   // 숨겨진 파일 input 참조
+  const [city, setCity] = useState("");
+  const [weather, setWeather] = useState(null);
 
 
 
@@ -58,62 +60,103 @@ export default function Main() {
       .catch(err => console.error(err));
   };
 
+  //날씨 가져오기
+  const fetchWeather = async () => {
+    if (!city) return;
+    try {
+      const res = await axios.get("http://127.0.0.1:8000/weather/", {
+        params: { city }
+      });
+      setWeather(res.data);
+      console.log(weather);
+    } catch (err) {
+      console.error(err);
+    }
+  };
+
   return (
     <>
-    <div className="container">
-      {/* 상단 버튼 영역*/}
-      <div className="button-group">
-        <Button onClick={() => navigate("/about")}>About Me</Button>
-        <Button onClick={() => navigate("/gallery")}>Gallery</Button>
-      </div>
-      <h1>wellcome to Kevin's board</h1>
-      <h2>write whatever you want!</h2>
+      {/*날씨 영역*/}
+      <div className="absolute top-4 right-4 flex flex-col items-end space-y-2">
+        {weather && (
+          <div className="shadow-lg p-2 w-60">
+              <h3 className="text-lg font-bold">{weather.name}</h3>
+              <p>{weather.weather[0].description}</p>
+              <p>🌡 {weather.main.temp}°C</p>
+              <p>💧 습도: {weather.main.humidity}%</p>
+          </div>
+        )}
 
-      {/* 글 작성 폼 */}
-      <form onSubmit={handleSubmit} className="post-form">
-        <input
-          type="text"
-          placeholder="제목"
-          value={title}
-          onChange={(e) => setTitle(e.target.value)}
-          required
-        />
-        <input
-          type="text"
-          placeholder="내용"
-          value={content}
-          onChange={(e) => setContent(e.target.value)}
-          required
-        />
-        <Button type="submit">작성</Button>
-        <div>
-          <Button onClick={handleButtonClick}>이미지 첨부</Button>
-          {/* 숨겨진 파일 input */}
+        {/*위치 입력*/}
+        <div className="flex space-x-2">
           <input
-            type="file"
-            accept="image/*"
-            ref={fileInputRef}
-            style={{ display: "none" }}
-            onChange={handleFileChange}
+            type="text"
+            placeholder="도시 입력 (예: Seoul)"
+            value={city}
+            onChange={(e) => setCity(e.target.value)}
+            className="border rounded p-1"
           />
+          <Button onClick={fetchWeather}>조회</Button>
         </div>
-      </form>
 
-      {/* 글 목록 */}
-      <ul className="post-list">
-        {posts.map(post => (
-          <li key={post.id}>
-            <strong>{post.title}</strong>: {post.content}
-          </li>
+      </div>
+      <div className="container">
+        {/* 상단 버튼 영역*/}
+        <div className="button-group">
+          <Button onClick={() => navigate("/about")}>About Me</Button>
+          <Button onClick={() => navigate("/gallery")}>Gallery</Button>
+        </div>
+        <h1>wellcome to Kevin's board</h1>
+        <h2>write whatever you want!</h2>
+
+        {/* 글 작성 폼 */}
+        <form onSubmit={handleSubmit} className="post-form">
+          <input
+            type="text"
+            placeholder="제목"
+            value={title}
+            onChange={(e) => setTitle(e.target.value)}
+            required
+          />
+          <input
+            type="text"
+            placeholder="내용"
+            value={content}
+            onChange={(e) => setContent(e.target.value)}
+            required
+          />
+          <Button type="submit">작성</Button>
+          <div>
+            <Button onClick={handleButtonClick}>이미지 첨부</Button>
+            {/* 숨겨진 파일 input */}
+            <input
+              type="file"
+              accept="image/*"
+              ref={fileInputRef}
+              style={{ display: "none" }}
+              onChange={handleFileChange}
+            />
+          </div>
+        </form>
+
+        {/* 글 목록 */}
+        <ul className="post-list">
+          {posts.map(post => (
+            <li key={post.id}>
+              <strong>{post.title}</strong>: {post.content}
+              <small className="text-gray-500">
+                작성일: {new Date(post.created_at).toLocaleString()}
+              </small>
+            </li>
+          ))}
+        </ul>
+      </div>
+
+      <div className="pagination">
+        {[1, 2, 3, 4, 5].map(num => (
+          <button key={num} onClick={() => setPage(num)}>{num}</button>
         ))}
-      </ul>
-    </div>
-
-    <div className="pagination">
-      {[1, 2, 3, 4, 5].map(num => (
-        <button key={num} onClick={() => setPage(num)}>{num}</button>
-      ))}
-    </div>
-    </>
-  );
-}
+      </div>
+      </>
+    );
+  }
