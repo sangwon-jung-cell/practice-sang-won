@@ -11,7 +11,7 @@ def get_posts(db: Session, skip: int = 0, limit: int = 10):
         .all()
     )
     return [
-        {"id": r.id, "title": r.title, "content": r.content}
+        {"id": r.id, "title": r.title, "content": r.content, "created_at" : r.created_at}
         for r in rows
     ]
 
