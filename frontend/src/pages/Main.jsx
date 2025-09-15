@@ -143,7 +143,8 @@ export default function Main() {
         <ul className="post-list">
           {posts.map(post => (
             <li key={post.id}>
-              <strong>{post.title}</strong>: {post.content}
+              <strong>{post.title}</strong>
+              <div>{post.content}</div>
               <small className="text-gray-500">
                 작성일: {new Date(post.created_at).toLocaleString()}
               </small>
